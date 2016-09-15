@@ -1,0 +1,567 @@
+Started GET "/cable" for 127.0.0.1 at 2016-09-15 11:31:58 -0700
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 11:31:58 -0700
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Connected to rethinkdb://localhost:28015/action_cable_demo_development
+[1;33m[   0.4ms] r.db_create("action_cable_demo_development")[0m
+Connected to rethinkdb://localhost:28015/action_cable_demo_development
+SpreadSheetCellsChannel is transmitting the subscription confirmation
+[1;33m[ 865.3ms] r.table_create( "users", {"durability" => "hard", "shards" => 1, "replicas" => 1, "primary_key" => "id"})[0m
+[1;31m[   1.0ms] r.table("users").config.update({"write_acks" => "majority"})[0m
+[1;31m[   0.8ms] r.table("users").insert({"id" => "3qVNRELkbjtj0i"})[0m
+ActiveUsersChannel transmitting {:current_user=>#<User id: "3qVNRELkbjtj0i">}
+ActiveUsersChannel is transmitting the subscription confirmation
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNRELkbjtj0i">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+Started GET "/" for 127.0.0.1 at 2016-09-15 11:32:06 -0700
+Processing by SpreadsheetController#index as HTML
+  Rendering spreadsheet/index.html.erb within layouts/application
+  Rendered spreadsheet/index.html.erb within layouts/application (120.0ms)
+Completed 200 OK in 996ms (Views: 986.0ms)
+
+
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 11:32:07 -0700
+Closing cursor: #<NoBrainer::Streams::ConcurrentAsyncHandler::AsyncQueryHandler:0x007fdb1ba71360 @handler=#<RethinkDB::CallbackHandler:0x007fdb1ba71658 @callback=#<Proc:0x007fdb1c8b6e70@/Users/kylecho/.rvm/gems/ruby-2.3.1/gems/nobrainer_streams-0.2.0/lib/nobrainer_streams.rb:31 (lambda)>, @stopped=true>, @msg=[152, [[41, [[15, ["spreadsheet_cells"]]], {"index"=>[73, [:location]]}]], {"include_initial"=>true}], @all_opts={:db=>r.db("action_cable_demo_development")}, @token=1, @conn=#<RethinkDB::Connection:70289526733440 (localhost:28015) (Default DB: r.db("action_cable_demo_development")) (open)>, @opened=true, @closed=false>
+Started GET "/cable" for 127.0.0.1 at 2016-09-15 11:32:08 -0700
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 11:32:08 -0700
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+SpreadSheetCellsChannel is transmitting the subscription confirmation
+[1;33m[ 659.5ms] r.table_create( "spreadsheet_cells", {"durability" => "hard", "shards" => 1, "replicas" => 1, "primary_key" => "location"})[0m
+[1;31m[ 133.7ms] r.table("users").insert({"id" => "3qVNY353CYg5JQ"})[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ">, "old_val"=>nil} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {:current_user=>#<User id: "3qVNY353CYg5JQ">}
+[1;31m[   3.2ms] r.table("spreadsheet_cells").config.update({"write_acks" => "majority"})[0m
+ActiveUsersChannel is transmitting the subscription confirmation
+[1;31m[   1.4ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_1| var_1[:lock].eq("3qVNRELkbjtj0i")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNRELkbjtj0i">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.0ms] r.table("users").get("3qVNRELkbjtj0i").delete[0m
+Closing cursor: #<NoBrainer::Streams::ConcurrentAsyncHandler::AsyncQueryHandler:0x007fdb1ca05330 @handler=#<RethinkDB::CallbackHandler:0x007fdb1ca05858 @callback=#<Proc:0x007fdb1ca0c6f8@/Users/kylecho/.rvm/gems/ruby-2.3.1/gems/nobrainer_streams-0.2.0/lib/nobrainer_streams.rb:31 (lambda)>>, @msg=[152, [[41, [[15, ["users"]]], {"index"=>[73, [:id]]}]], {"include_initial"=>true}], @all_opts={:db=>r.db("action_cable_demo_development")}, @token=2, @conn=#<RethinkDB::Connection:70289526733440 (localhost:28015) (Default DB: r.db("action_cable_demo_development")) (open)>, @opened=true, @closed=false>
+ActiveUsersChannel transmitting {"new_val"=>nil, "old_val"=>#<User id: "3qVNRELkbjtj0i">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>nil, "old_val"=>#<User id: "3qVNRELkbjtj0i">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>0, "c"=>0, "r2"=>0, "c2"=>0}})
+[1;31m[   1.5ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_2| {"selected_cells" => r.literal({"r" => 0, "c" => 0, "r2" => 0, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNY353CYg5JQ">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>0, "c"=>0}})
+[1;31m[   1.2ms] r.table("spreadsheet_cells").get([0, 0]).replace {|var_3| r.branch( var_3.eq(nil), {"location" => [0, 0], "lock" => "3qVNY353CYg5JQ"}, var_3.merge( r.branch(var_3["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock acquired by 3qVNY353CYg5JQ on [0, 0]
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>0, "c"=>0}})
+[1;31m[   1.2ms] r.table("spreadsheet_cells").get([0, 0]).replace {|var_4| r.branch( var_4.eq(nil), {"location" => [0, 0], "lock" => "3qVNY353CYg5JQ"}, var_4.merge( r.branch(var_4["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock refused to 3qVNY353CYg5JQ on [0, 0]
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.4ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_5| {"selected_cells" => nil}}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>0, "r2"=>4, "c2"=>0}})
+[1;31m[   1.1ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_6| {"selected_cells" => r.literal({"r" => 4, "c" => 0, "r2" => 4, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>4, "c"=>0}})
+[1;31m[   1.3ms] r.table("spreadsheet_cells").get([4, 0]).replace {|var_7| r.branch( var_7.eq(nil), {"location" => [4, 0], "lock" => "3qVNY353CYg5JQ"}, var_7.merge( r.branch(var_7["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock acquired by 3qVNY353CYg5JQ on [4, 0]
+Started GET "/" for 127.0.0.1 at 2016-09-15 11:32:32 -0700
+Processing by SpreadsheetController#index as HTML
+  Rendering spreadsheet/index.html.erb within layouts/application
+  Rendered spreadsheet/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 33ms (Views: 31.8ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2016-09-15 11:32:33 -0700
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 11:32:33 -0700
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+[1;31m[   1.3ms] r.table("users").insert({"id" => "3qVNoXyxvC0NNA"})[0m
+SpreadSheetCellsChannel is transmitting the subscription confirmation
+ActiveUsersChannel transmitting {:current_user=>#<User id: "3qVNoXyxvC0NNA">}
+ActiveUsersChannel is transmitting the subscription confirmation
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA">, "old_val"=>nil} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 0], lock: "3qVNY353CYg5JQ">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 0], lock: "3qVNY353CYg5JQ">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   2.4ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_8| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>0, "c"=>0, "r2"=>0, "c2"=>0}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.9ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_9| {"selected_cells" => r.literal({"r" => 0, "c" => 0, "r2" => 0, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>3, "r2"=>3, "c2"=>3}})
+[1;31m[   1.2ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_10| {"selected_cells" => r.literal({"r" => 3, "c" => 3, "r2" => 3, "c2" => 3})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>1, "r2"=>1, "c2"=>1}})
+[1;31m[   2.0ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_11| {"selected_cells" => r.literal({"r" => 1, "c" => 1, "r2" => 1, "c2" => 1})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>1, "c"=>1}})
+[1;31m[   1.4ms] r.table("spreadsheet_cells").get([1, 1]).replace {|var_12| r.branch( var_12.eq(nil), {"location" => [1, 1], "lock" => "3qVNoXyxvC0NNA"}, var_12.merge( r.branch(var_12["lock"].eq(nil), {"lock" => "3qVNoXyxvC0NNA"}, {}) ) )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 1], lock: "3qVNoXyxvC0NNA">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Lock acquired by 3qVNoXyxvC0NNA on [1, 1]
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>2, "r2"=>1, "c2"=>2}})
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>1, "c"=>1}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   4.0ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_13| {"selected_cells" => r.literal({"r" => 1, "c" => 2, "r2" => 1, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   7.4ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_14| var_14[:lock].eq("3qVNoXyxvC0NNA")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 1], lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 1], lock: "3qVNoXyxvC0NNA">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[1, 1], "value"=>"s"})
+[1;33m[ 969.0ms] r.table_create( "nobrainer_locks", {"durability" => "hard", "shards" => 1, "replicas" => 1, "primary_key" => "key_hash"})[0m
+[1;31m[   1.2ms] r.table("nobrainer_locks").config.update({"write_acks" => "majority"})[0m
+[1;31m[   1.1ms] r.table("nobrainer_locks").get( "FE7moJYKx/6Lr0bSqY7KJHv5rYM=").replace {|var_15| r.branch( var_15.eq(nil).or(var_15[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[1, 1]", "key_hash" => "FE7moJYKx/6Lr0bSqY7KJHv5rYM=", "instance_token" => "3qVNwaSKxInFiy", "expires_at" => r.now.add(60)}, var_15 )}[0m
+[1;32m[   0.8ms] r.table("spreadsheet_cells").get_all([1, 1], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+[1;31m[   0.9ms] r.table("spreadsheet_cells").get([1, 1]).update {|var_16| {"value" => "s"}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 1], value: "s", lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 1], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   1.7ms] r.table("nobrainer_locks").get( "FE7moJYKx/6Lr0bSqY7KJHv5rYM=").replace {|var_17| r.branch( var_17[:instance_token].default(nil).eq("3qVNwaSKxInFiy"), nil, var_17 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>1, "r2"=>1, "c2"=>1}})
+[1;31m[   2.3ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_18| {"selected_cells" => r.literal({"r" => 1, "c" => 1, "r2" => 1, "c2" => 1})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>1, "r2"=>2, "c2"=>1}})
+[1;31m[   2.1ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_19| {"selected_cells" => r.literal({"r" => 2, "c" => 1, "r2" => 2, "c2" => 1})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>2, "c"=>1}})
+[1;31m[   1.4ms] r.table("spreadsheet_cells").get([2, 1]).replace {|var_20| r.branch( var_20.eq(nil), {"location" => [2, 1], "lock" => "3qVNY353CYg5JQ"}, var_20.merge( r.branch(var_20["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 1], lock: "3qVNY353CYg5JQ">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Lock acquired by 3qVNY353CYg5JQ on [2, 1]
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>1, "r2"=>2, "c2"=>1}})
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>1, "r2"=>2, "c2"=>1}})
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>2, "c"=>1}})
+[1;31m[   1.2ms] r.table("spreadsheet_cells").get([2, 1]).replace {|var_21| r.branch( var_21.eq(nil), {"location" => [2, 1], "lock" => "3qVNY353CYg5JQ"}, var_21.merge( r.branch(var_21["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock refused to 3qVNY353CYg5JQ on [2, 1]
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>2, "c"=>1}})
+[1;31m[   1.2ms] r.table("spreadsheet_cells").get([2, 1]).replace {|var_22| r.branch( var_22.eq(nil), {"location" => [2, 1], "lock" => "3qVNY353CYg5JQ"}, var_22.merge( r.branch(var_22["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock refused to 3qVNY353CYg5JQ on [2, 1]
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>1, "r2"=>3, "c2"=>1}})
+[1;31m[   1.5ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_23| {"selected_cells" => r.literal({"r" => 3, "c" => 1, "r2" => 3, "c2" => 1})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>3, "r2"=>3, "c2"=>3}})
+[1;31m[   2.0ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_24| {"selected_cells" => r.literal({"r" => 3, "c" => 3, "r2" => 3, "c2" => 3})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>0, "c"=>4, "r2"=>0, "c2"=>4}})
+[1;31m[   1.4ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_25| {"selected_cells" => r.literal({"r" => 0, "c" => 4, "r2" => 0, "c2" => 4})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>4, "c2"=>4, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>4, "c2"=>4, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>0, "c"=>4}})
+[1;31m[   1.4ms] r.table("spreadsheet_cells").get([0, 4]).replace {|var_26| r.branch( var_26.eq(nil), {"location" => [0, 4], "lock" => "3qVNoXyxvC0NNA"}, var_26.merge( r.branch(var_26["lock"].eq(nil), {"lock" => "3qVNoXyxvC0NNA"}, {}) ) )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 4], lock: "3qVNoXyxvC0NNA">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Lock acquired by 3qVNoXyxvC0NNA on [0, 4]
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>0, "c"=>4}})
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 4], lock: nil>, "old_val"=>#<SpreadsheetCell location: [0, 4], lock: "3qVNoXyxvC0NNA">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   3.3ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_27| var_27[:lock].eq("3qVNoXyxvC0NNA")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel#set_cell_value({"location"=>[0, 4], "value"=>"bbb"})
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   1.2ms] r.table("nobrainer_locks").get( "L/kzN1qXUK25La4qFU02p0Uw3Io=").replace {|var_28| r.branch( var_28.eq(nil).or(var_28[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[0, 4]", "key_hash" => "L/kzN1qXUK25La4qFU02p0Uw3Io=", "instance_token" => "3qVO5vR8dtVgu8", "expires_at" => r.now.add(60)}, var_28 )}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: nil>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>4, "c2"=>4, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: nil>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>4, "c2"=>4, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.8ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_29| {"selected_cells" => nil}}[0m
+[1;32m[   3.4ms] r.table("spreadsheet_cells").get_all([0, 4], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+[1;31m[  13.0ms] r.table("spreadsheet_cells").get([0, 4]).update {|var_30| {"value" => "bbb"}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 4], value: "bbb", lock: nil>, "old_val"=>#<SpreadsheetCell location: [0, 4], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   1.0ms] r.table("nobrainer_locks").get( "L/kzN1qXUK25La4qFU02p0Uw3Io=").replace {|var_31| r.branch( var_31[:instance_token].default(nil).eq("3qVO5vR8dtVgu8"), nil, var_31 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>5, "r2"=>3, "c2"=>5}})
+[1;31m[   1.5ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_32| {"selected_cells" => r.literal({"r" => 3, "c" => 5, "r2" => 3, "c2" => 5})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>5, "c2"=>5, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>5, "c2"=>5, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>3, "r2"=>2, "c2"=>3}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>3, "c2"=>3, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>5, "c2"=>5, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.0ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_33| {"selected_cells" => r.literal({"r" => 2, "c" => 3, "r2" => 2, "c2" => 3})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>3, "c2"=>3, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>5, "c2"=>5, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>0, "c"=>2, "r2"=>0, "c2"=>2}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>3, "c2"=>3, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>3, "c2"=>3, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   4.7ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_34| {"selected_cells" => r.literal({"r" => 0, "c" => 2, "r2" => 0, "c2" => 2})}}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>2, "r2"=>4, "c2"=>2}})
+[1;31m[   1.3ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_35| {"selected_cells" => r.literal({"r" => 4, "c" => 2, "r2" => 4, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   1.5ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_36| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>2, "r2"=>3, "c2"=>2}})
+[1;31m[   1.4ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_37| {"selected_cells" => r.literal({"r" => 3, "c" => 2, "r2" => 3, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>1, "r2"=>2, "c2"=>1}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.9ms] r.table("users").get("3qVNoXyxvC0NNA").update {|var_38| {"selected_cells" => r.literal({"r" => 2, "c" => 1, "r2" => 2, "c2" => 1})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>2, "c2"=>2, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>0, "r2"=>1, "c2"=>0}})
+[1;31m[   1.5ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_39| {"selected_cells" => r.literal({"r" => 1, "c" => 0, "r2" => 1, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>0, "r2"=>1, "c2"=>0}})
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>1, "c"=>0}})
+[1;31m[   1.3ms] r.table("spreadsheet_cells").get([1, 0]).replace {|var_40| r.branch( var_40.eq(nil), {"location" => [1, 0], "lock" => "3qVNY353CYg5JQ"}, var_40.merge( r.branch(var_40["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock acquired by 3qVNY353CYg5JQ on [1, 0]
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 0], lock: "3qVNY353CYg5JQ">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 11:33:37 -0700
+Closing cursor: #<NoBrainer::Streams::ConcurrentAsyncHandler::AsyncQueryHandler:0x007fdb22a3b420 @handler=#<RethinkDB::CallbackHandler:0x007fdb22a3ba38 @callback=#<Proc:0x007fdb22a4bb40@/Users/kylecho/.rvm/gems/ruby-2.3.1/gems/nobrainer_streams-0.2.0/lib/nobrainer_streams.rb:31 (lambda)>>, @msg=[152, [[41, [[15, ["spreadsheet_cells"]]], {"index"=>[73, [:location]]}]], {"include_initial"=>true}], @all_opts={:db=>r.db("action_cable_demo_development")}, @token=5, @conn=#<RethinkDB::Connection:70289526733440 (localhost:28015) (Default DB: r.db("action_cable_demo_development")) (open)>, @opened=true, @closed=false>
+[1;31m[   1.2ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_41| var_41[:lock].eq("3qVNoXyxvC0NNA")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+[1;31m[   0.9ms] r.table("users").get("3qVNoXyxvC0NNA").delete[0m
+ActiveUsersChannel transmitting {"new_val"=>nil, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+Closing cursor: #<NoBrainer::Streams::ConcurrentAsyncHandler::AsyncQueryHandler:0x007fdb22aa9498 @handler=#<RethinkDB::CallbackHandler:0x007fdb22aa9a38 @callback=#<Proc:0x007fdb22ab9ca8@/Users/kylecho/.rvm/gems/ruby-2.3.1/gems/nobrainer_streams-0.2.0/lib/nobrainer_streams.rb:31 (lambda)>>, @msg=[152, [[41, [[15, ["users"]]], {"index"=>[73, [:id]]}]], {"include_initial"=>true}], @all_opts={:db=>r.db("action_cable_demo_development")}, @token=6, @conn=#<RethinkDB::Connection:70289526733440 (localhost:28015) (Default DB: r.db("action_cable_demo_development")) (open)>, @opened=true, @closed=false>
+ActiveUsersChannel transmitting {"new_val"=>nil, "old_val"=>#<User id: "3qVNoXyxvC0NNA", selected_cells: {"c"=>1, "c2"=>1, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   1.5ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_42| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>0, "r2"=>1, "c2"=>0}})
+[1;31m[   1.2ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_43| {"selected_cells" => r.literal({"r" => 1, "c" => 0, "r2" => 1, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>0, "r2"=>3, "c2"=>0}})
+[1;31m[   1.3ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_44| {"selected_cells" => r.literal({"r" => 3, "c" => 0, "r2" => 3, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>0, "r2"=>4, "c2"=>0}})
+[1;31m[   1.4ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_45| {"selected_cells" => r.literal({"r" => 4, "c" => 0, "r2" => 4, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>2, "r2"=>4, "c2"=>2}})
+[1;31m[   1.4ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_46| {"selected_cells" => r.literal({"r" => 4, "c" => 2, "r2" => 4, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>3, "r2"=>3, "c2"=>3}})
+[1;31m[   1.3ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_47| {"selected_cells" => r.literal({"r" => 3, "c" => 3, "r2" => 3, "c2" => 3})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>3, "c"=>3}})
+[1;31m[   1.4ms] r.table("spreadsheet_cells").get([3, 3]).replace {|var_48| r.branch( var_48.eq(nil), {"location" => [3, 3], "lock" => "3qVNY353CYg5JQ"}, var_48.merge( r.branch(var_48["lock"].eq(nil), {"lock" => "3qVNY353CYg5JQ"}, {}) ) )}[0m
+Lock acquired by 3qVNY353CYg5JQ on [3, 3]
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   1.8ms] r.table("users").get("3qVNY353CYg5JQ").update {|var_49| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+Finished "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 11:34:06 -0700
+Closing cursor: #<NoBrainer::Streams::ConcurrentAsyncHandler::AsyncQueryHandler:0x007fdb1e869560 @handler=#<RethinkDB::CallbackHandler:0x007fdb1e869b00 @callback=#<Proc:0x007fdb1ea55c48@/Users/kylecho/.rvm/gems/ruby-2.3.1/gems/nobrainer_streams-0.2.0/lib/nobrainer_streams.rb:31 (lambda)>, @stopped=true>, @msg=[152, [[41, [[15, ["spreadsheet_cells"]]], {"index"=>[73, [:location]]}]], {"include_initial"=>true}], @all_opts={:db=>r.db("action_cable_demo_development")}, @token=3, @conn=#<RethinkDB::Connection:70289526733440 (localhost:28015) (Default DB: r.db("action_cable_demo_development")) (open)>, @opened=true, @closed=false>
+[1;31m[   1.7ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_50| var_50[:lock].eq("3qVNY353CYg5JQ")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+[1;31m[   0.7ms] r.table("users").get("3qVNY353CYg5JQ").delete[0m
+Closing cursor: #<NoBrainer::Streams::ConcurrentAsyncHandler::AsyncQueryHandler:0x007fdb219c0618 @handler=#<RethinkDB::CallbackHandler:0x007fdb219c0bb8 @callback=#<Proc:0x007fdb219d0ce8@/Users/kylecho/.rvm/gems/ruby-2.3.1/gems/nobrainer_streams-0.2.0/lib/nobrainer_streams.rb:31 (lambda)>>, @msg=[152, [[41, [[15, ["users"]]], {"index"=>[73, [:id]]}]], {"include_initial"=>true}], @all_opts={:db=>r.db("action_cable_demo_development")}, @token=4, @conn=#<RethinkDB::Connection:70289526733440 (localhost:28015) (Default DB: r.db("action_cable_demo_development")) (open)>, @opened=true, @closed=false>
+ActiveUsersChannel transmitting {"new_val"=>nil, "old_val"=>#<User id: "3qVNY353CYg5JQ", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+Started GET "/" for 127.0.0.1 at 2016-09-15 12:36:15 -0700
+Processing by SpreadsheetController#index as HTML
+  Rendering spreadsheet/index.html.erb within layouts/application
+  Rendered spreadsheet/index.html.erb within layouts/application (192.6ms)
+Completed 200 OK in 250ms (Views: 240.4ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2016-09-15 12:36:16 -0700
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 12:36:16 -0700
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Connected to rethinkdb://localhost:28015/action_cable_demo_development
+[1;31m[  21.3ms] r.table("users").insert({"id" => "3qW2qFI6aIF01D"})[0m
+ActiveUsersChannel transmitting {:current_user=>#<User id: "3qW2qFI6aIF01D">}
+Connected to rethinkdb://localhost:28015/action_cable_demo_development
+ActiveUsersChannel is transmitting the subscription confirmation
+SpreadSheetCellsChannel is transmitting the subscription confirmation
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 1], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 4], value: "bbb", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 1], value: "s", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Started GET "/" for 127.0.0.1 at 2016-09-15 12:36:29 -0700
+Processing by SpreadsheetController#index as HTML
+  Rendering spreadsheet/index.html.erb within layouts/application
+  Rendered spreadsheet/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 32ms (Views: 30.0ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2016-09-15 12:36:30 -0700
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 12:36:30 -0700
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+SpreadSheetCellsChannel is transmitting the subscription confirmation
+[1;31m[   1.6ms] r.table("users").insert({"id" => "3qW2ziotex0nmV"})[0m
+ActiveUsersChannel transmitting {:current_user=>#<User id: "3qW2ziotex0nmV">}
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV">, "old_val"=>nil} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel is transmitting the subscription confirmation
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 1], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 4], value: "bbb", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 1], value: "s", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>2, "r2"=>2, "c2"=>2}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2qFI6aIF01D">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.4ms] r.table("users").get("3qW2qFI6aIF01D").update {|var_1| {"selected_cells" => r.literal({"r" => 2, "c" => 2, "r2" => 2, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2qFI6aIF01D">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>2, "r2"=>2, "c2"=>2}})
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>2, "c"=>2}})
+[1;31m[   1.5ms] r.table("spreadsheet_cells").get([2, 2]).replace {|var_2| r.branch( var_2.eq(nil), {"location" => [2, 2], "lock" => "3qW2qFI6aIF01D"}, var_2.merge( r.branch(var_2["lock"].eq(nil), {"lock" => "3qW2qFI6aIF01D"}, {}) ) )}[0m
+Lock acquired by 3qW2qFI6aIF01D on [2, 2]
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], lock: "3qW2qFI6aIF01D">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], lock: "3qW2qFI6aIF01D">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>4, "r2"=>4, "c2"=>4}})
+[1;31m[   1.5ms] r.table("users").get("3qW2ziotex0nmV").update {|var_3| {"selected_cells" => r.literal({"r" => 4, "c" => 4, "r2" => 4, "c2" => 4})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>2, "r2"=>4, "c2"=>2}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   4.1ms] r.table("users").get("3qW2ziotex0nmV").update {|var_4| {"selected_cells" => r.literal({"r" => 4, "c" => 2, "r2" => 4, "c2" => 2})}}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>5, "r2"=>2, "c2"=>5}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.4ms] r.table("users").get("3qW2ziotex0nmV").update {|var_5| {"selected_cells" => r.literal({"r" => 2, "c" => 5, "r2" => 2, "c2" => 5})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>5, "r2"=>4, "c2"=>5}})
+[1;31m[   1.5ms] r.table("users").get("3qW2ziotex0nmV").update {|var_6| {"selected_cells" => r.literal({"r" => 4, "c" => 5, "r2" => 4, "c2" => 5})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>0, "c"=>5, "r2"=>0, "c2"=>5}})
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>2, "c"=>2}})
+[1;31m[   6.3ms] r.table("users").get("3qW2qFI6aIF01D").update {|var_7| {"selected_cells" => r.literal({"r" => 0, "c" => 5, "r2" => 0, "c2" => 5})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>5, "c2"=>5, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>5, "c2"=>5, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.5ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_8| var_8[:lock].eq("3qW2qFI6aIF01D")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], lock: "3qW2qFI6aIF01D">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], lock: "3qW2qFI6aIF01D">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[2, 2], "value"=>""})
+[1;31m[   1.6ms] r.table("nobrainer_locks").get("6oHhrgpLKp62OP0nhuMiH2lN9ww=").replace {|var_9| r.branch( var_9.eq(nil).or(var_9[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[2, 2]", "key_hash" => "6oHhrgpLKp62OP0nhuMiH2lN9ww=", "instance_token" => "3qW3PWLL4KSKnb", "expires_at" => r.now.add(60)}, var_9 )}[0m
+[1;32m[   0.6ms] r.table("spreadsheet_cells").get_all([2, 2], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[  18.4ms] r.table("spreadsheet_cells").get([2, 2]).update {|var_10| {"value" => ""}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   1.5ms] r.table("nobrainer_locks").get( "6oHhrgpLKp62OP0nhuMiH2lN9ww=").replace {|var_11| r.branch( var_11[:instance_token].default(nil).eq("3qW3PWLL4KSKnb"), nil, var_11 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>4, "r2"=>1, "c2"=>4}})
+[1;31m[   1.5ms] r.table("users").get("3qW2qFI6aIF01D").update {|var_12| {"selected_cells" => r.literal({"r" => 1, "c" => 4, "r2" => 1, "c2" => 4})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>4, "c2"=>4, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>5, "c2"=>5, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>4, "c2"=>4, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>5, "c2"=>5, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>1, "c"=>4}})
+[1;31m[   1.2ms] r.table("spreadsheet_cells").get([1, 4]).replace {|var_13| r.branch( var_13.eq(nil), {"location" => [1, 4], "lock" => "3qW2qFI6aIF01D"}, var_13.merge( r.branch(var_13["lock"].eq(nil), {"lock" => "3qW2qFI6aIF01D"}, {}) ) )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], lock: "3qW2qFI6aIF01D">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Lock acquired by 3qW2qFI6aIF01D on [1, 4]
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], lock: "3qW2qFI6aIF01D">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>1, "c"=>4}})
+[1;31m[   2.6ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_14| var_14[:lock].eq("3qW2qFI6aIF01D")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 4], lock: "3qW2qFI6aIF01D">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 4], lock: "3qW2qFI6aIF01D">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[1, 4], "value"=>"ss"})
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   1.4ms] r.table("nobrainer_locks").get( "/dhuushmucVEYXSnkmgdD6khTD8=").replace {|var_15| r.branch( var_15.eq(nil).or(var_15[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[1, 4]", "key_hash" => "/dhuushmucVEYXSnkmgdD6khTD8=", "instance_token" => "3qW3RNXnLbfsWp", "expires_at" => r.now.add(60)}, var_15 )}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: nil>, "old_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>4, "c2"=>4, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.8ms] r.table("users").get("3qW2qFI6aIF01D").update {|var_16| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: nil>, "old_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: {"c"=>4, "c2"=>4, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;32m[   3.3ms] r.table("spreadsheet_cells").get_all([1, 4], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], value: "ss", lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 4], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], value: "ss", lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 4], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[ 114.1ms] r.table("spreadsheet_cells").get([1, 4]).update {|var_17| {"value" => "ss"}}[0m
+[1;31m[   1.0ms] r.table("nobrainer_locks").get( "/dhuushmucVEYXSnkmgdD6khTD8=").replace {|var_18| r.branch( var_18[:instance_token].default(nil).eq("3qW3RNXnLbfsWp"), nil, var_18 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>2, "r2"=>4, "c2"=>2}})
+[1;31m[   1.5ms] r.table("users").get("3qW2ziotex0nmV").update {|var_19| {"selected_cells" => r.literal({"r" => 4, "c" => 2, "r2" => 4, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>4, "c"=>2}})
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], lock: "3qW2ziotex0nmV">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], lock: "3qW2ziotex0nmV">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   3.0ms] r.table("spreadsheet_cells").get([4, 2]).replace {|var_20| r.branch( var_20.eq(nil), {"location" => [4, 2], "lock" => "3qW2ziotex0nmV"}, var_20.merge( r.branch(var_20["lock"].eq(nil), {"lock" => "3qW2ziotex0nmV"}, {}) ) )}[0m
+Lock acquired by 3qW2ziotex0nmV on [4, 2]
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>4, "c"=>2}})
+[1;31m[   2.0ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_21| var_21[:lock].eq("3qW2ziotex0nmV")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [4, 2], lock: "3qW2ziotex0nmV">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [4, 2], lock: "3qW2ziotex0nmV">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[4, 2], "value"=>"hi"})
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>5, "c"=>2, "r2"=>5, "c2"=>2}})
+[1;31m[   1.0ms] r.table("nobrainer_locks").get( "XR049cScJl0/qc/tf61OpN9gRHM=").replace {|var_22| r.branch( var_22.eq(nil).or(var_22[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[4, 2]", "key_hash" => "XR049cScJl0/qc/tf61OpN9gRHM=", "instance_token" => "3qW3UmahHVRotX", "expires_at" => r.now.add(60)}, var_22 )}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.3ms] r.table("users").get("3qW2ziotex0nmV").update {|var_23| {"selected_cells" => r.literal({"r" => 5, "c" => 2, "r2" => 5, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;32m[   3.2ms] r.table("spreadsheet_cells").get_all([4, 2], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+[1;31m[  25.5ms] r.table("spreadsheet_cells").get([4, 2]).update {|var_24| {"value" => "hi"}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], value: "hi", lock: nil>, "old_val"=>#<SpreadsheetCell location: [4, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], value: "hi", lock: nil>, "old_val"=>#<SpreadsheetCell location: [4, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   1.5ms] r.table("nobrainer_locks").get( "XR049cScJl0/qc/tf61OpN9gRHM=").replace {|var_25| r.branch( var_25[:instance_token].default(nil).eq("3qW3UmahHVRotX"), nil, var_25 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: nil>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.3ms] r.table("users").get("3qW2ziotex0nmV").update {|var_26| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: nil>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+Started GET "/" for 127.0.0.1 at 2016-09-15 12:38:03 -0700
+Processing by SpreadsheetController#index as HTML
+  Rendering spreadsheet/index.html.erb within layouts/application
+  Rendered spreadsheet/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 17ms (Views: 15.3ms)
+
+
+Started GET "/cable" for 127.0.0.1 at 2016-09-15 12:38:03 -0700
+Started GET "/cable/" [WebSocket] for 127.0.0.1 at 2016-09-15 12:38:03 -0700
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+SpreadSheetCellsChannel is transmitting the subscription confirmation
+[1;31m[   1.4ms] r.table("users").insert({"id" => "3qW40AIizzbhcB"})[0m
+ActiveUsersChannel transmitting {:current_user=>#<User id: "3qW40AIizzbhcB">}
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB">, "old_val"=>nil} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 0], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 1], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel is transmitting the subscription confirmation
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB">, "old_val"=>nil} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 4], value: "ss", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2qFI6aIF01D", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [0, 4], value: "bbb", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 1], value: "s", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [4, 2], value: "hi", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>4, "r2"=>4, "c2"=>4}})
+[1;31m[   1.1ms] r.table("users").get("3qW40AIizzbhcB").update {|var_27| {"selected_cells" => r.literal({"r" => 4, "c" => 4, "r2" => 4, "c2" => 4})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB">} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>2, "r2"=>1, "c2"=>2}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.2ms] r.table("users").get("3qW2ziotex0nmV").update {|var_28| {"selected_cells" => r.literal({"r" => 1, "c" => 2, "r2" => 1, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>2, "r2"=>1, "c2"=>2}})
+[1;31m[   1.4ms] r.table("users").get("3qW40AIizzbhcB").update {|var_29| {"selected_cells" => r.literal({"r" => 1, "c" => 2, "r2" => 1, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>4, "c2"=>4, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>2, "r2"=>1, "c2"=>2}})
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>1, "c"=>2}})
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], lock: "3qW40AIizzbhcB">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], lock: "3qW40AIizzbhcB">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   3.2ms] r.table("spreadsheet_cells").get([1, 2]).replace {|var_30| r.branch( var_30.eq(nil), {"location" => [1, 2], "lock" => "3qW40AIizzbhcB"}, var_30.merge( r.branch(var_30["lock"].eq(nil), {"lock" => "3qW40AIizzbhcB"}, {}) ) )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], lock: "3qW40AIizzbhcB">, "old_val"=>nil} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Lock acquired by 3qW40AIizzbhcB on [1, 2]
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>1, "c"=>2}})
+[1;31m[   2.0ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_31| var_31[:lock].eq("3qW40AIizzbhcB")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 2], lock: "3qW40AIizzbhcB">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 2], lock: "3qW40AIizzbhcB">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 2], lock: "3qW40AIizzbhcB">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[1, 2], "value"=>"hello"})
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>2, "r2"=>2, "c2"=>2}})
+[1;31m[   1.1ms] r.table("nobrainer_locks").get( "jRHUXZmFswBgkJcVwkk6CdrY9Qc=").replace {|var_32| r.branch( var_32.eq(nil).or(var_32[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[1, 2]", "key_hash" => "jRHUXZmFswBgkJcVwkk6CdrY9Qc=", "instance_token" => "3qW4U7qHbAyiKB", "expires_at" => r.now.add(60)}, var_32 )}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.5ms] r.table("users").get("3qW40AIizzbhcB").update {|var_33| {"selected_cells" => r.literal({"r" => 2, "c" => 2, "r2" => 2, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;32m[   3.2ms] r.table("spreadsheet_cells").get_all([1, 2], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], value: "hello", lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[  19.7ms] r.table("spreadsheet_cells").get([1, 2]).update {|var_34| {"value" => "hello"}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], value: "hello", lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [1, 2], value: "hello", lock: nil>, "old_val"=>#<SpreadsheetCell location: [1, 2], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   2.3ms] r.table("nobrainer_locks").get( "jRHUXZmFswBgkJcVwkk6CdrY9Qc=").replace {|var_35| r.branch( var_35[:instance_token].default(nil).eq("3qW4U7qHbAyiKB"), nil, var_35 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>2, "r2"=>3, "c2"=>2}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.4ms] r.table("users").get("3qW2ziotex0nmV").update {|var_36| {"selected_cells" => r.literal({"r" => 3, "c" => 2, "r2" => 3, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>2, "r2"=>2, "c2"=>2}})
+[1;31m[   1.9ms] r.table("users").get("3qW2ziotex0nmV").update {|var_37| {"selected_cells" => r.literal({"r" => 2, "c" => 2, "r2" => 2, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>2, "c"=>2}})
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: "3qW2ziotex0nmV">, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   2.6ms] r.table("spreadsheet_cells").get([2, 2]).replace {|var_38| r.branch( var_38.eq(nil), {"location" => [2, 2], "lock" => "3qW2ziotex0nmV"}, var_38.merge( r.branch(var_38["lock"].eq(nil), {"lock" => "3qW2ziotex0nmV"}, {}) ) )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: "3qW2ziotex0nmV">, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+Lock refused to 3qW2ziotex0nmV on [2, 2]
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: "3qW2ziotex0nmV">, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>2, "c"=>2}})
+[1;31m[   2.3ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_39| var_39[:lock].eq("3qW2ziotex0nmV")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: "3qW2ziotex0nmV">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: "3qW2ziotex0nmV">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: "3qW2ziotex0nmV">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[2, 2], "value"=>"Hi"})
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>2, "r2"=>3, "c2"=>2}})
+[1;31m[   1.9ms] r.table("nobrainer_locks").get( "6oHhrgpLKp62OP0nhuMiH2lN9ww=").replace {|var_40| r.branch( var_40.eq(nil).or(var_40[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[2, 2]", "key_hash" => "6oHhrgpLKp62OP0nhuMiH2lN9ww=", "instance_token" => "3qW4XvRs9SmVM3", "expires_at" => r.now.add(60)}, var_40 )}[0m
+[1;31m[   4.4ms] r.table("users").get("3qW2ziotex0nmV").update {|var_41| {"selected_cells" => r.literal({"r" => 3, "c" => 2, "r2" => 3, "c2" => 2})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;32m[  12.4ms] r.table("spreadsheet_cells").get_all([2, 2], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+[1;31m[   0.9ms] r.table("spreadsheet_cells").get([2, 2]).update {|var_42| {"value" => "Hi"}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "Hi", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   2.0ms] r.table("nobrainer_locks").get( "6oHhrgpLKp62OP0nhuMiH2lN9ww=").replace {|var_43| r.branch( var_43[:instance_token].default(nil).eq("3qW4XvRs9SmVM3"), nil, var_43 )}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "Hi", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [2, 2], value: "Hi", lock: nil>, "old_val"=>#<SpreadsheetCell location: [2, 2], value: "", lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>3, "r2"=>3, "c2"=>3}})
+[1;31m[   1.1ms] r.table("users").get("3qW40AIizzbhcB").update {|var_44| {"selected_cells" => r.literal({"r" => 3, "c" => 3, "r2" => 3, "c2" => 3})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>2, "c2"=>2, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#lock_cell({"location"=>{"r"=>3, "c"=>3}})
+[1;31m[   1.4ms] r.table("spreadsheet_cells").get([3, 3]).replace {|var_45| r.branch( var_45.eq(nil), {"location" => [3, 3], "lock" => "3qW40AIizzbhcB"}, var_45.merge( r.branch(var_45["lock"].eq(nil), {"lock" => "3qW40AIizzbhcB"}, {}) ) )}[0m
+Lock refused to 3qW40AIizzbhcB on [3, 3]
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: "3qW40AIizzbhcB">, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: "3qW40AIizzbhcB">, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: "3qW40AIizzbhcB">, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+ActiveUsersChannel#unlock_cell({"location"=>{"r"=>3, "c"=>3}})
+[1;31m[   1.9ms] r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}).filter {|var_46| var_46[:lock].eq("3qW40AIizzbhcB")}.update({"lock" => nil})[0;39m -- perf: filtering without using an index[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: "3qW40AIizzbhcB">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: "3qW40AIizzbhcB">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: "3qW40AIizzbhcB">} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel#set_cell_value({"location"=>[3, 3], "value"=>"haha"})
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>3, "r2"=>4, "c2"=>3}})
+[1;31m[   1.1ms] r.table("nobrainer_locks").get( "WGgSt50l2Twcp4jI5ljsG+HMygo=").replace {|var_47| r.branch( var_47.eq(nil).or(var_47[:expires_at].lt(r.now)), {"key" => "uniq:action_cable_demo_development:spreadsheet_cells:location:[3, 3]", "key_hash" => "WGgSt50l2Twcp4jI5ljsG+HMygo=", "instance_token" => "3qW4fMvgqvJ4MN", "expires_at" => r.now.add(60)}, var_47 )}[0m
+[1;31m[   1.9ms] r.table("users").get("3qW40AIizzbhcB").update {|var_48| {"selected_cells" => r.literal({"r" => 4, "c" => 3, "r2" => 4, "c2" => 3})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;32m[   4.5ms] r.table("spreadsheet_cells").get_all([3, 3], {"index" => :location}).order_by( r.asc(:location)).limit(1)[0m
+[1;31m[  38.0ms] r.table("spreadsheet_cells").get([3, 3]).update {|var_49| {"value" => "haha"}}[0m
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], value: "haha", lock: nil>, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], value: "haha", lock: nil>, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+SpreadSheetCellsChannel transmitting {"new_val"=>#<SpreadsheetCell location: [3, 3], value: "haha", lock: nil>, "old_val"=>#<SpreadsheetCell location: [3, 3], lock: nil>} (via streamed from r.table("spreadsheet_cells").order_by({"index" => r.asc(:location)}))
+[1;31m[   1.4ms] r.table("nobrainer_locks").get( "WGgSt50l2Twcp4jI5ljsG+HMygo=").replace {|var_50| r.branch( var_50[:instance_token].default(nil).eq("3qW4fMvgqvJ4MN"), nil, var_50 )}[0m
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.2ms] r.table("users").get("3qW40AIizzbhcB").update {|var_51| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>3, "c2"=>3, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>5, "r2"=>4, "c2"=>5}})
+[1;31m[   2.0ms] r.table("users").get("3qW40AIizzbhcB").update {|var_52| {"selected_cells" => r.literal({"r" => 4, "c" => 5, "r2" => 4, "c2" => 5})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>5, "c"=>0, "r2"=>5, "c2"=>0}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   2.6ms] r.table("users").get("3qW2ziotex0nmV").update {|var_53| {"selected_cells" => r.literal({"r" => 5, "c" => 0, "r2" => 5, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>2, "c2"=>2, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>1, "c"=>0, "r2"=>1, "c2"=>0}})
+[1;31m[   1.3ms] r.table("users").get("3qW2ziotex0nmV").update {|var_54| {"selected_cells" => r.literal({"r" => 1, "c" => 0, "r2" => 1, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>0, "c"=>0, "r2"=>0, "c2"=>0}})
+[1;31m[   1.5ms] r.table("users").get("3qW2ziotex0nmV").update {|var_55| {"selected_cells" => r.literal({"r" => 0, "c" => 0, "r2" => 0, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>1, "r2"=>1}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>2, "c"=>0, "r2"=>2, "c2"=>0}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.7ms] r.table("users").get("3qW2ziotex0nmV").update {|var_56| {"selected_cells" => r.literal({"r" => 2, "c" => 0, "r2" => 2, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>2, "r2"=>2}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>0, "r2"=>0}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>0, "r2"=>3, "c2"=>0}})
+[1;31m[   1.9ms] r.table("users").get("3qW2ziotex0nmV").update {|var_57| {"selected_cells" => r.literal({"r" => 3, "c" => 0, "r2" => 3, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>2, "r2"=>2}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>3, "c"=>1, "r2"=>3, "c2"=>1}})
+[1;31m[   1.3ms] r.table("users").get("3qW2ziotex0nmV").update {|var_58| {"selected_cells" => r.literal({"r" => 3, "c" => 1, "r2" => 3, "c2" => 1})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>4, "c"=>0, "r2"=>4, "c2"=>0}})
+[1;31m[   1.8ms] r.table("users").get("3qW2ziotex0nmV").update {|var_59| {"selected_cells" => r.literal({"r" => 4, "c" => 0, "r2" => 4, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>1, "c2"=>1, "r"=>3, "r2"=>3}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>5, "c"=>0, "r2"=>5, "c2"=>0}})
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+[1;31m[   3.9ms] r.table("users").get("3qW2ziotex0nmV").update {|var_60| {"selected_cells" => r.literal({"r" => 5, "c" => 0, "r2" => 5, "c2" => 0})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW2ziotex0nmV", selected_cells: {"c"=>0, "c2"=>0, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>{"r"=>5, "c"=>5, "r2"=>5, "c2"=>5}})
+[1;31m[   1.2ms] r.table("users").get("3qW40AIizzbhcB").update {|var_61| {"selected_cells" => r.literal({"r" => 5, "c" => 5, "r2" => 5, "c2" => 5})}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>5, "r2"=>5}>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>4, "r2"=>4}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel#select_cells({"selected_cells"=>nil})
+[1;31m[   1.8ms] r.table("users").get("3qW40AIizzbhcB").update {|var_62| {"selected_cells" => nil}}[0m
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))
+ActiveUsersChannel transmitting {"new_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: nil>, "old_val"=>#<User id: "3qW40AIizzbhcB", selected_cells: {"c"=>5, "c2"=>5, "r"=>5, "r2"=>5}>} (via streamed from r.table("users").order_by({"index" => r.asc(:id)}))

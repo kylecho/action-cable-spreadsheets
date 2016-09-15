@@ -1,0 +1,32 @@
+I"£(function() {
+  App.active_users = App.cable.subscriptions.create("ActiveUsersChannel", {
+    received: function(data) {
+      if (data.old_val && !data.new_val) {
+        return App.spreadsheet.remove_user(data.old_val);
+      } else if (data.new_val) {
+        return App.spreadsheet.new_user(data.new_val);
+      } else if (data.current_user) {
+        return App.spreadsheet.set_current_user(data.current_user);
+      } else if (data.locked_cell) {
+        return App.spreadsheet.acquired_cell_lock(data.locked_cell);
+      }
+    },
+    select_cells: function(cells) {
+      return this.perform('select_cells', {
+        selected_cells: cells
+      });
+    },
+    lock_cell: function(location) {
+      return this.perform('lock_cell', {
+        location: location
+      });
+    },
+    unlock_cell: function(location) {
+      return this.perform('unlock_cell', {
+        location: location
+      });
+    }
+  });
+
+}).call(this);
+:ET
